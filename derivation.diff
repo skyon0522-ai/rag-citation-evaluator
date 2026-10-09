@@ -1,0 +1,377 @@
+--- ../components/tantivy/examples/basic_search.rs
++++ src/main.rs
+@@ -1,239 +1,146 @@
+-// # Basic Example
+-//
+-// This example covers the basic functionalities of
+-// tantivy.
+-//
+-// We will :
+-// - define our schema
+-// - create an index in a directory
+-// - index a few documents into our index
+-// - search for the best document matching a basic query
+-// - retrieve the best document's original content.
+-
+-// ---
+-// Importing tantivy...
++// Retrieval sequence adapted from pinned Tantivy examples/basic_search.rs.
++// Copyright (c) 2018 by the project authors listed in retained AUTHORS; see LICENSE.
++use serde::Deserialize;
++use serde_json::{json, Value as Json};
++use sha2::{Digest, Sha256};
++use std::collections::{BTreeSet, HashMap};
++use std::{env, error::Error, fs, process};
+ use tantivy::collector::TopDocs;
+ use tantivy::query::QueryParser;
+ use tantivy::schema::*;
+ use tantivy::{doc, Index, IndexWriter, ReloadPolicy};
+-use tempfile::TempDir;
+ 
+-fn main() -> tantivy::Result<()> {
+-    // Let's create a temporary directory for the
+-    // sake of this example
+-    let index_path = TempDir::new()?;
++#[derive(Deserialize)]
++#[serde(deny_unknown_fields)]
++struct Source { id: String, version: String, text: String }
++#[derive(Deserialize)]
++#[serde(deny_unknown_fields)]
++struct Corpus { sources: Vec<Source> }
++#[derive(Deserialize)]
++#[serde(deny_unknown_fields)]
++struct Citation {
++    source_id: String, source_version: String, source_sha256: String,
++    start: usize, end: usize, quote: String,
++}
++#[derive(Deserialize)]
++#[serde(deny_unknown_fields)]
++struct Request {
++    query: String, top_k: usize, corpus_sha256: String,
++    expected_source_ids: Vec<String>, answer: String, citations: Vec<Citation>,
++}
+ 
+-    // # Defining the schema
+-    //
+-    // The Tantivy index requires a very strict schema.
+-    // The schema declares which fields are in the index,
+-    // and for each field, its type and "the way it should
+-    // be indexed".
++fn sha256(bytes: &[u8]) -> String { format!("{:x}", Sha256::digest(bytes)) }
++fn nonempty(text: &str) -> bool { !text.trim().is_empty() }
++fn digest_shape(text: &str) -> bool {
++    text.len() == 64 && text.bytes().all(|b| b.is_ascii_digit() || (b'a'..=b'f').contains(&b))
++}
++fn invalid(code: &str, detail: impl ToString) -> (Json, i32) {
++    (json!({"status":"invalid_fixture", "code":code, "detail":detail.to_string(),
++        "retrieval_evaluated":false, "semantic_support":"not_evaluated"}), 2)
++}
+ 
+-    // First we need to define a schema ...
+-    let mut schema_builder = Schema::builder();
+-
+-    // Our first field is title.
+-    // We want full-text search for it, and we also want
+-    // to be able to retrieve the document after the search.
+-    //
+-    // `TEXT | STORED` is some syntactic sugar to describe
+-    // that.
+-    //
+-    // `TEXT` means the field should be tokenized and indexed,
+-    // along with its term frequency and term positions.
+-    //
+-    // `STORED` means that the field will also be saved
+-    // in a compressed, row-oriented key-value store.
+-    // This store is useful for reconstructing the
+-    // documents that were selected during the search phase.
+-    schema_builder.add_text_field("title", TEXT | STORED);
+-
+-    // Our second field is body.
+-    // We want full-text search for it, but we do not
+-    // need to be able to retrieve it
+-    // for our application.
+-    //
+-    // We can make our index lighter by omitting the `STORED` flag.
+-    schema_builder.add_text_field("body", TEXT);
+-
+-    let schema = schema_builder.build();
+-
+-    // # Indexing documents
+-    //
+-    // Let's create a brand new index.
+-    //
+-    // This will actually just save a meta.json
+-    // with our schema in the directory.
+-    let index = Index::create_in_dir(&index_path, schema.clone())?;
+-
+-    // To insert a document we will need an index writer.
+-    // There must be only one writer at a time.
+-    // This single `IndexWriter` is already
+-    // multithreaded.
+-    //
+-    // Here we give tantivy a budget of `50MB`.
+-    // Using a bigger memory_arena for the indexer may increase
+-    // throughput, but 50 MB is already plenty.
+-    let mut index_writer: IndexWriter = index.writer(50_000_000)?;
+-
+-    // Let's index our documents!
+-    // We first need a handle on the title and the body field.
+-
+-    // ### Adding documents
+-    //
+-    // We can create a document manually, by setting the fields
+-    // one by one in a Document object.
+-    let title = schema.get_field("title").unwrap();
+-    let body = schema.get_field("body").unwrap();
+-
+-    let mut old_man_doc = TantivyDocument::default();
+-    old_man_doc.add_text(title, "The Old Man and the Sea");
+-    old_man_doc.add_text(
+-        body,
+-        "He was an old man who fished alone in a skiff in the Gulf Stream and he had gone \
+-         eighty-four days now without taking a fish.",
+-    );
+-
+-    // ... and add it to the `IndexWriter`.
+-    index_writer.add_document(old_man_doc)?;
+-
+-    // For convenience, tantivy also comes with a macro to
+-    // reduce the boilerplate above.
+-    index_writer.add_document(doc!(
+-    title => "Of Mice and Men",
+-    body => "A few miles south of Soledad, the Salinas River drops in close to the hillside \
+-            bank and runs deep and green. The water is warm too, for it has slipped twinkling \
+-            over the yellow sands in the sunlight before reaching the narrow pool. On one \
+-            side of the river the golden foothill slopes curve up to the strong and rocky \
+-            Gabilan Mountains, but on the valley side the water is lined with trees—willows \
+-            fresh and green with every spring, carrying in their lower leaf junctures the \
+-            debris of the winter’s flooding; and sycamores with mottled, white, recumbent \
+-            limbs and branches that arch over the pool"
+-    ))?;
+-
+-    // Multivalued field just need to be repeated.
+-    index_writer.add_document(doc!(
+-    title => "Frankenstein",
+-    title => "The Modern Prometheus",
+-    body => "You will rejoice to hear that no disaster has accompanied the commencement of an \
+-             enterprise which you have regarded with such evil forebodings.  I arrived here \
+-             yesterday, and my first task is to assure my dear sister of my welfare and \
+-             increasing confidence in the success of my undertaking."
+-    ))?;
+-
+-    // This is an example, so we will only index 3 documents
+-    // here. You can check out tantivy's tutorial to index
+-    // the English wikipedia. Tantivy's indexing is rather fast.
+-    // Indexing 5 million articles of the English wikipedia takes
+-    // around 3 minutes on my computer!
+-
+-    // ### Committing
+-    //
+-    // At this point our documents are not searchable.
+-    //
+-    //
+-    // We need to call `.commit()` explicitly to force the
+-    // `index_writer` to finish processing the documents in the queue,
+-    // flush the current index to the disk, and advertise
+-    // the existence of new documents.
+-    //
+-    // This call is blocking.
+-    index_writer.commit()?;
+-
+-    // If `.commit()` returns correctly, then all of the
+-    // documents that have been added are guaranteed to be
+-    // persistently indexed.
+-    //
+-    // In the scenario of a crash or a power failure,
+-    // tantivy behaves as if it has rolled back to its last
+-    // commit.
+-
+-    // # Searching
+-    //
+-    // ### Searcher
+-    //
+-    // A reader is required first in order to search an index.
+-    // It acts as a `Searcher` pool that reloads itself,
+-    // depending on a `ReloadPolicy`.
+-    //
+-    // For a search server you will typically create one reader for the entire lifetime of your
+-    // program, and acquire a new searcher for every single request.
+-    //
+-    // In the code below, we rely on the 'ON_COMMIT' policy: the reader
+-    // will reload the index automatically after each commit.
+-    let reader = index
+-        .reader_builder()
+-        .reload_policy(ReloadPolicy::OnCommitWithDelay)
+-        .try_into()?;
+-
+-    // We now need to acquire a searcher.
+-    //
+-    // A searcher points to a snapshotted, immutable version of the index.
+-    //
+-    // Some search experience might require more than
+-    // one query. Using the same searcher ensures that all of these queries will run on the
+-    // same version of the index.
+-    //
+-    // Acquiring a `searcher` is very cheap.
+-    //
+-    // You should acquire a searcher every time you start processing a request and
+-    // and release it right after your query is finished.
+-    let searcher = reader.searcher();
+-
+-    // ### Query
+-
+-    // The query parser can interpret human queries.
+-    // Here, if the user does not specify which
+-    // field they want to search, tantivy will search
+-    // in both title and body.
+-    let query_parser = QueryParser::for_index(&index, vec![title, body]);
+-
+-    // `QueryParser` may fail if the query is not in the right
+-    // format. For user facing applications, this can be a problem.
+-    // A ticket has been opened regarding this problem.
+-    let query = query_parser.parse_query("sea whale")?;
+-
+-    // A query defines a set of documents, as
+-    // well as the way they should be scored.
+-    //
+-    // A query created by the query parser is scored according
+-    // to a metric called Tf-Idf, and will consider
+-    // any document matching at least one of our terms.
+-
+-    // ### Collectors
+-    //
+-    // We are not interested in all of the documents but
+-    // only in the top 10. Keeping track of our top 10 best documents
+-    // is the role of the `TopDocs` collector.
+-
+-    // We can now perform our query.
+-    let top_docs = searcher.search(&query, &TopDocs::with_limit(10).order_by_score())?;
+-
+-    // The actual documents still need to be
+-    // retrieved from Tantivy's store.
+-    //
+-    // Since the body field was not configured as stored,
+-    // the document returned will only contain
+-    // a title.
+-    for (_score, doc_address) in top_docs {
+-        let retrieved_doc: TantivyDocument = searcher.doc(doc_address)?;
+-        println!("{}", retrieved_doc.to_json(&schema));
++fn evaluate(corpus: Corpus, request: Request, corpus_digest: String) -> Result<(Json, i32), Box<dyn Error>> {
++    if corpus.sources.is_empty() { return Ok(invalid("empty_corpus", "At least one source is required.")); }
++    let mut ids = BTreeSet::new();
++    for source in &corpus.sources {
++        if !nonempty(&source.id) || !nonempty(&source.version) || !nonempty(&source.text) {
++            return Ok(invalid("empty_source_field", "Every source needs nonempty id, version and text."));
++        }
++        if !ids.insert(source.id.clone()) { return Ok(invalid("duplicate_source_id", &source.id)); }
++    }
++    if !nonempty(&request.query) || !nonempty(&request.answer) || !(1..=5).contains(&request.top_k) {
++        return Ok(invalid("invalid_request_fields", "Nonempty query/answer and top_k 1..5 are required."));
++    }
++    if !digest_shape(&request.corpus_sha256) {
++        return Ok(invalid("invalid_corpus_digest", "Expected lowercase SHA-256 hexadecimal."));
++    }
++    if request.expected_source_ids.is_empty()
++        || request.expected_source_ids.iter().any(|s| !nonempty(s))
++        || request.expected_source_ids.iter().collect::<BTreeSet<_>>().len() != request.expected_source_ids.len() {
++        return Ok(invalid("expected_sources_required", "Distinct nonempty expected retrieval IDs are required."));
++    }
++    if request.citations.is_empty() { return Ok(invalid("citations_required", "At least one citation is required.")); }
++    if request.citations.iter().any(|c| !nonempty(&c.source_id) || !nonempty(&c.source_version) || !digest_shape(&c.source_sha256)) {
++        return Ok(invalid("invalid_citation_fields", "Citation ID/version and lowercase source digest are required."));
+     }
+ 
+-    // We can also get an explanation to understand
+-    // how a found document got its score.
+-    let query = query_parser.parse_query("title:sea^20 body:whale^70")?;
++    // minimalism: one in-memory index per request; no server, persistent index or agent framework.
++    let mut schema_builder = Schema::builder();
++    let id = schema_builder.add_text_field("source_id", STRING | STORED);
++    let text = schema_builder.add_text_field("source_text", TEXT | STORED);
++    let schema = schema_builder.build();
++    let index = Index::create_in_ram(schema);
++    let mut writer: IndexWriter = index.writer(50_000_000)?;
++    for source in &corpus.sources {
++        writer.add_document(doc!(id => source.id.as_str(), text => source.text.as_str()))?;
++    }
++    writer.commit()?;
++    let reader = index.reader_builder().reload_policy(ReloadPolicy::OnCommitWithDelay).try_into()?;
++    let searcher = reader.searcher();
++    let parser = QueryParser::for_index(&index, vec![text]);
++    let query = match parser.parse_query(&request.query) {
++        Ok(query) => query,
++        Err(error) => return Ok(invalid("invalid_query", error)),
++    };
++    let top_docs = searcher.search(&query, &TopDocs::with_limit(request.top_k).order_by_score())?;
++    let sources: HashMap<_, _> = corpus.sources.iter().map(|s| (s.id.as_str(), s)).collect();
++    let mut selected = BTreeSet::new();
++    let mut retrieved = Vec::new();
++    for (score, address) in top_docs {
++        let stored: TantivyDocument = searcher.doc(address)?;
++        let source_id = stored.get_first(id).and_then(|v| v.as_str().map(str::to_owned)).ok_or("Stored ID missing.")?;
++        let stored_text = stored.get_first(text).and_then(|v| v.as_str().map(str::to_owned)).ok_or("Stored text missing.")?;
++        let source = sources.get(source_id.as_str()).ok_or("Stored ID absent from corpus.")?;
++        if stored_text != source.text { return Err("Stored UTF-8 text differs from the input source.".into()); }
++        selected.insert(source_id.clone());
++        retrieved.push(json!({"source_id":source_id, "source_version":source.version,
++            "source_sha256":sha256(source.text.as_bytes()), "stored_text_sha256":sha256(stored_text.as_bytes()), "score":score}));
++    }
++    let missing: Vec<_> = request.expected_source_ids.iter().filter(|id| !selected.contains(*id)).collect();
++    let mut errors = Vec::new();
++    if request.corpus_sha256 != corpus_digest {
++        errors.push(json!({"code":"corpus_snapshot_mismatch", "expected":request.corpus_sha256, "actual":corpus_digest}));
++    }
++    for (position, citation) in request.citations.iter().enumerate() {
++        let mut reject = |code: &str| errors.push(json!({"citation_index":position, "source_id":citation.source_id, "code":code}));
++        let Some(source) = sources.get(citation.source_id.as_str()) else { reject("unknown_source"); continue; };
++        if !selected.contains(&citation.source_id) { reject("source_not_retrieved"); }
++        if citation.source_version != source.version { reject("source_version_mismatch"); }
++        if citation.source_sha256 != sha256(source.text.as_bytes()) { reject("source_digest_mismatch"); }
++        if !nonempty(&citation.quote) { reject("empty_quote"); }
++        if citation.start >= citation.end || citation.end > source.text.len() {
++            reject("invalid_span_bounds");
++        } else if !source.text.is_char_boundary(citation.start) || !source.text.is_char_boundary(citation.end) {
++            reject("invalid_utf8_boundary");
++        } else if source.text[citation.start..citation.end] != citation.quote {
++            reject("quote_mismatch");
++        }
++    }
++    let integrity_passed = errors.is_empty();
++    let retrieval_passed = missing.is_empty();
++    let accepted = integrity_passed && retrieval_passed;
++    Ok((json!({"status":if accepted {"accepted"} else {"rejected"}, "corpus_sha256":corpus_digest,
++        "query":request.query, "top_k":request.top_k, "retrieval_evaluated":true, "retrieved":retrieved,
++        "retrieval_expectation":{"passed":retrieval_passed, "expected_source_ids":request.expected_source_ids, "missing_source_ids":missing},
++        "reference_integrity":{"passed":integrity_passed, "errors":errors},
++        "answer":request.answer, "semantic_support":"not_evaluated",
++        "engine":{"package":"tantivy", "dependency":"../components/tantivy", "source_pin":"72d1ef9a6468aa68bbc69dcc80cdf60aaf64364d"}}), if accepted {0} else {1}))
++}
+ 
+-    let (_score, doc_address) = searcher
+-        .search(&query, &TopDocs::with_limit(1).order_by_score())?
+-        .into_iter()
+-        .next()
+-        .unwrap();
+-
+-    let explanation = query.explain(&searcher, doc_address)?;
+-
+-    println!("{}", explanation.to_pretty_json());
+-
+-    Ok(())
++fn run() -> Result<(Json, i32), Box<dyn Error>> {
++    let args: Vec<_> = env::args().collect();
++    if args.len() != 3 { return Ok(invalid("usage", "rag-reference-contract CORPUS.json REQUEST.json")); }
++    let corpus_bytes = fs::read(&args[1])?;
++    let corpus = match serde_json::from_slice(&corpus_bytes) {
++        Ok(corpus) => corpus, Err(error) => return Ok(invalid("invalid_corpus_json", error)),
++    };
++    let request = match serde_json::from_slice(&fs::read(&args[2])?) {
++        Ok(request) => request, Err(error) => return Ok(invalid("invalid_request_json", error)),
++    };
++    evaluate(corpus, request, sha256(&corpus_bytes))
+ }
++fn main() {
++    let (report, exit) = run().unwrap_or_else(|error| (json!({"status":"execution_error", "detail":error.to_string(), "semantic_support":"not_evaluated"}), 3));
++    println!("{}", serde_json::to_string_pretty(&report).expect("JSON report serialization"));
++    process::exit(exit);
++}

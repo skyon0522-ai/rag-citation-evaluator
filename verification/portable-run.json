@@ -1,0 +1,34 @@
+{
+  "status": "passed",
+  "entrypoint": "./verify-portable.sh",
+  "build_command": "cargo build --locked --manifest-path cli/Cargo.toml",
+  "fixture_command": "python3 -B cli/tests/check_fixtures.py <built-cli> <output-directory>",
+  "toolchain": {
+    "rustc": "1.99.0",
+    "cargo": "1.99.0",
+    "python": "3.12.3",
+    "platform": "Ubuntu 24.04 x86_64; x86_64-unknown-linux-gnu"
+  },
+  "copied_engine": {
+    "version": "0.26.2",
+    "commit": "72d1ef9a6468aa68bbc69dcc80cdf60aaf64364d",
+    "build_log_confirms_local_path": true,
+    "path_in_package": "components/tantivy"
+  },
+  "source_manifest_sha256": "d517dea4abd9aba5808bfda0e59e306791bdcab12dc778cb686952549ac78c06",
+  "cli_lock_sha256": "5710103bc230a161c26558f452edc1139de5b2716ff05363a956f3d17d0a8f46",
+  "binary_sha256": "7291521a261a57e76a4cf05bf9e98bbf78ebfb672e148c8b89cd75525422b302",
+  "cargo_offline": true,
+  "registry_cache_reuse": "Existing baseline and previously accepted improvement caches; no fresh acquisition.",
+  "fixture_tests": 22,
+  "passed": 22,
+  "accepted": 3,
+  "rejected": 12,
+  "invalid_fixture": 7,
+  "actual_retrieval_cases": 15,
+  "build_exit": 0,
+  "fixture_suite_exit": 0,
+  "baseline_rerun": false,
+  "network_services_started": 0,
+  "provider_calls": 0
+}

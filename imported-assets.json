@@ -1,0 +1,208 @@
+{
+  "binary_data_assets": [
+    {
+      "path": "columnar/compat_tests_data/v1.columnar",
+      "bytes": 31754,
+      "sha256": "dab66a0aadca38b26d2422f913053b5cc5d9239684b702016d52262e2e5655bd",
+      "git_blob": "58e7b9efbf424af5d00e78d60ccc5c211c2aded2",
+      "git_mode": "100644",
+      "purpose": "Imported documentation PNG or compatibility-test data; not a native program."
+    },
+    {
+      "path": "columnar/compat_tests_data/v2.columnar",
+      "bytes": 42007,
+      "sha256": "147b48f7a82c2dd7d25a186107627377afc01aa73510d6b5e7f8bb494d410c1c",
+      "git_blob": "78bbcf868e3a11d87c99f2f6493c19097ee24046",
+      "git_mode": "100644",
+      "purpose": "Imported documentation PNG or compatibility-test data; not a native program."
+    },
+    {
+      "path": "doc/assets/images/Nuclia.png",
+      "bytes": 3196,
+      "sha256": "fcb48b0b11ce12aa2e27232c494d887d4e8829590f9ec588cc6cd94b8e38ab9c",
+      "git_blob": "dc2758d1a7d9d7120c95242e1bd223e8e874f267",
+      "git_mode": "100644",
+      "purpose": "Imported documentation PNG or compatibility-test data; not a native program."
+    },
+    {
+      "path": "doc/assets/images/element-dark-theme.png",
+      "bytes": 56831,
+      "sha256": "2cfccf152822761a393afd4663482fb073fb547bd1b6147641842b13c667cef7",
+      "git_blob": "7c8db46df74f7cff3d501350e7de62b9bb8de818",
+      "git_mode": "100644",
+      "purpose": "Imported documentation PNG or compatibility-test data; not a native program."
+    },
+    {
+      "path": "doc/assets/images/etsy.png",
+      "bytes": 87274,
+      "sha256": "2a34011a9a4159b488e8a9103e90fed27e36981c4cdbe90c6aed15b06d5d37f5",
+      "git_blob": "4ee398ed0fdfecc1344237d6ca508bfe94f4a0a0",
+      "git_mode": "100644",
+      "purpose": "Imported documentation PNG or compatibility-test data; not a native program."
+    },
+    {
+      "path": "doc/assets/images/humanfirst.ai-dark-theme.png",
+      "bytes": 23167,
+      "sha256": "139467e894ef96cd0e1ce233f5ad798dfe11fdb061c48ad475f1207a1d8ad7ca",
+      "git_blob": "28997ffcc01bd69ff69f1671c74b97c5756d9faf",
+      "git_mode": "100644",
+      "purpose": "Imported documentation PNG or compatibility-test data; not a native program."
+    },
+    {
+      "path": "doc/assets/images/humanfirst.png",
+      "bytes": 104353,
+      "sha256": "7d723f77cb9774b44ead9c1762d0ac8ca91d1b446076cd00a76ed1fd32018a21",
+      "git_blob": "6256eeb193285579ad08d0258ad64dc62c5504d3",
+      "git_mode": "100644",
+      "purpose": "Imported documentation PNG or compatibility-test data; not a native program."
+    },
+    {
+      "path": "doc/assets/images/nuclia-dark-theme.png",
+      "bytes": 8008,
+      "sha256": "835bd4a79c944196d016eafd89befb97a58f2cf44d593dcd0e5c66dfc0f8d79b",
+      "git_blob": "b1678cc2ab09de9ff67d20c4eec5deaeba9c734a",
+      "git_mode": "100644",
+      "purpose": "Imported documentation PNG or compatibility-test data; not a native program."
+    },
+    {
+      "path": "doc/assets/images/paradedb.png",
+      "bytes": 7604,
+      "sha256": "71713b8cd630c8d0fb0a1d720fcaf767c514c633bf03550ead97af845f4686ec",
+      "git_blob": "5fb2b1e905162e418f58c2369754bb38607bb155",
+      "git_mode": "100644",
+      "purpose": "Imported documentation PNG or compatibility-test data; not a native program."
+    },
+    {
+      "path": "tests/compat_tests_data/index_v6/00000000000000000000000000000000.fast",
+      "bytes": 146,
+      "sha256": "8444170d83a3e957c74731de33551fb7db2357cfe7b52ab69f1391e9773c9af6",
+      "git_blob": "f550fe3aa5fd1dd1edcd6e0992818fff1aa0ef3e",
+      "git_mode": "100644",
+      "purpose": "Imported compatibility-test data; never executed as a native program."
+    },
+    {
+      "path": "tests/compat_tests_data/index_v6/00000000000000000000000000000000.fieldnorm",
+      "bytes": 113,
+      "sha256": "e9d4c38783d77682fd04a4b15eaa30c2329e42d6220a2abe5998d4a3c90adec5",
+      "git_blob": "08af09ea23fe5f7f7fcbd3c7b7346d75f01e9425",
+      "git_mode": "100644",
+      "purpose": "Imported documentation PNG or compatibility-test data; not a native program."
+    },
+    {
+      "path": "tests/compat_tests_data/index_v6/00000000000000000000000000000000.idx",
+      "bytes": 130,
+      "sha256": "3bd125beb3dae1f62984bd5d0a92991b71b83d95abd7d06fd0b72ddb91b040e1",
+      "git_blob": "a881999d19725a878eafa40d02d0f1ba26598ec2",
+      "git_mode": "100644",
+      "purpose": "Imported documentation PNG or compatibility-test data; not a native program."
+    },
+    {
+      "path": "tests/compat_tests_data/index_v6/00000000000000000000000000000000.pos",
+      "bytes": 112,
+      "sha256": "db10ebdf267b8dca06bb224efe578dfed4e1a9d66ffa3f840dcc2fb8153920a8",
+      "git_blob": "e1faa10811531eebc41164ed2d5b7c10570fa8c3",
+      "git_mode": "100644",
+      "purpose": "Imported documentation PNG or compatibility-test data; not a native program."
+    },
+    {
+      "path": "tests/compat_tests_data/index_v6/00000000000000000000000000000000.store",
+      "bytes": 170,
+      "sha256": "cc4b63c29cf65e454a39019f93bee4cfec46292a5b6ac52b259d939f02198826",
+      "git_blob": "97497908d951c262f85a7ff376a4e0e4c2fb5ae9",
+      "git_mode": "100644",
+      "purpose": "Imported documentation PNG or compatibility-test data; not a native program."
+    },
+    {
+      "path": "tests/compat_tests_data/index_v6/00000000000000000000000000000000.term",
+      "bytes": 349,
+      "sha256": "0ff91dfb6997995a1d9ab1f01a454dc1f060fa7f959a583dde41f5e60a5f0b22",
+      "git_blob": "b2df64c6c0fe47be564fd62558d6c8fd397e1d7b",
+      "git_mode": "100644",
+      "purpose": "Imported documentation PNG or compatibility-test data; not a native program."
+    },
+    {
+      "path": "tests/compat_tests_data/index_v7/000002f0000000000000000000000000.fast",
+      "bytes": 146,
+      "sha256": "c9d16eb088d7003d31dcf2f958e65b80954f1b3720c42cfa1399a3905717d737",
+      "git_blob": "8bd1d4318d319bda534570bd4218b3682785290b",
+      "git_mode": "100644",
+      "purpose": "Imported compatibility-test data; never executed as a native program."
+    },
+    {
+      "path": "tests/compat_tests_data/index_v7/000002f0000000000000000000000000.fieldnorm",
+      "bytes": 113,
+      "sha256": "cdb7a5e72725bb0d9c035e9a1ea646bb2970d560c73ff32f482f5bae9178aabc",
+      "git_blob": "49005c2eb99345e656ccca0515269bcfc3b25abf",
+      "git_mode": "100644",
+      "purpose": "Imported documentation PNG or compatibility-test data; not a native program."
+    },
+    {
+      "path": "tests/compat_tests_data/index_v7/000002f0000000000000000000000000.idx",
+      "bytes": 130,
+      "sha256": "ef4f8941c193d735552ec766a8ab150586c634124a6d2aff47cf0dea80c6ad94",
+      "git_blob": "6d29a6b57f7bbc00c82751dfc03cca35c6aa930d",
+      "git_mode": "100644",
+      "purpose": "Imported documentation PNG or compatibility-test data; not a native program."
+    },
+    {
+      "path": "tests/compat_tests_data/index_v7/000002f0000000000000000000000000.pos",
+      "bytes": 112,
+      "sha256": "39d6882db209cfec29944272a11d2ed456516822b05fe5ec8fc1d33e7142b89b",
+      "git_blob": "a50c38d543eda05b0c270b2b3a6b95a454bd525d",
+      "git_mode": "100644",
+      "purpose": "Imported documentation PNG or compatibility-test data; not a native program."
+    },
+    {
+      "path": "tests/compat_tests_data/index_v7/000002f0000000000000000000000000.store",
+      "bytes": 171,
+      "sha256": "7b580f2f39fbe62279b003223a62f958a7a892e84a4e8d800aecd3c55a96eef3",
+      "git_blob": "8dd320ce90b2893e58f4a34675468deb7231981d",
+      "git_mode": "100644",
+      "purpose": "Imported documentation PNG or compatibility-test data; not a native program."
+    },
+    {
+      "path": "tests/compat_tests_data/index_v7/000002f0000000000000000000000000.term",
+      "bytes": 349,
+      "sha256": "1f0e111f75cb67b6df0570ebc45013f8f1e41a85740c18376591e42dc7ffcae5",
+      "git_blob": "f1a6530979e2656da327985e0eb7898e3103a0b2",
+      "git_mode": "100644",
+      "purpose": "Imported documentation PNG or compatibility-test data; not a native program."
+    }
+  ],
+  "imported_json_lines": [
+    {
+      "path": "benches/gh.json",
+      "bytes": 2370381,
+      "sha256": "26d000295820f750c45d379c373ae2fc1d493a6fa43a022d9666f9d5d25e1a46",
+      "git_blob": "0b09b4fb280388b1215b5900aeb39c98a6ad65e2",
+      "git_mode": "100644",
+      "format": "JSON Lines",
+      "records": 1000
+    },
+    {
+      "path": "benches/hdfs.json",
+      "bytes": 22406992,
+      "sha256": "cf2f60991ca1b4e8a4edfff53dc0be14920614a0174902e2348bb70c2ecbd1a2",
+      "git_blob": "28d68125948a39939fa283006f00cb940a9feb87",
+      "git_mode": "100644",
+      "format": "JSON Lines",
+      "records": 100000
+    },
+    {
+      "path": "benches/wiki.json",
+      "bytes": 1157023,
+      "sha256": "8d0eb5925974a446e577523476ee3eba30b2a7f8205d3f0304279e4f3f17be07",
+      "git_blob": "34c23f7f61b4fbfae4203c7084dd65a93c170d85",
+      "git_mode": "100644",
+      "format": "JSON Lines",
+      "records": 1000
+    }
+  ],
+  "malformed_cli_fixture": {
+    "path": "cli/fixtures/malformed-corpus.json",
+    "bytes": 8,
+    "sha256": "8f9302f65614f26c0ac129b3a69b2617d858989920ca60be65da649dc4b34118",
+    "purpose": "Exact rejected input for the malformed_corpus_json regression; deliberately invalid JSON."
+  },
+  "no_native_executables_or_dependency_archives": true
+}

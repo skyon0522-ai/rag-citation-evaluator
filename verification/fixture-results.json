@@ -1,0 +1,415 @@
+{
+  "status": "passed",
+  "fixture_tests": 22,
+  "passed": 22,
+  "accepted": 3,
+  "rejected": 12,
+  "invalid_fixture": 7,
+  "actual_retrieval_cases": 15,
+  "semantic_support": "not_evaluated",
+  "binary_sha256": "7291521a261a57e76a4cf05bf9e98bbf78ebfb672e148c8b89cd75525422b302",
+  "network_services_started": 0,
+  "provider_calls": 0,
+  "results": [
+    {
+      "name": "valid_retrieved_quote",
+      "status": "accepted",
+      "exit": 0,
+      "codes": [],
+      "retrieval_evaluated": true,
+      "retrieved_ids": [
+        "doc-plan"
+      ],
+      "semantic_support": "not_evaluated",
+      "reference_integrity_passed": true,
+      "retrieval_expectation_passed": true,
+      "fixture_sha256": {
+        "corpus": "e163788e8cb60bf6d93876e353e2e9d7330f1245726974a382fc6487b4c15a8c",
+        "request": "6c024360beedf59094c12a620d89dfdce4d61c2d0e72019e4711e180bc1747f1"
+      }
+    },
+    {
+      "name": "valid_utf8_quote",
+      "status": "accepted",
+      "exit": 0,
+      "codes": [],
+      "retrieval_evaluated": true,
+      "retrieved_ids": [
+        "doc-unicode"
+      ],
+      "semantic_support": "not_evaluated",
+      "reference_integrity_passed": true,
+      "retrieval_expectation_passed": true,
+      "fixture_sha256": {
+        "corpus": "e163788e8cb60bf6d93876e353e2e9d7330f1245726974a382fc6487b4c15a8c",
+        "request": "fad2dc0506a127f974de8f8047297abd8e6239232bfe66a058b70c6ad4ac5aee"
+      }
+    },
+    {
+      "name": "semantic_counterexample",
+      "status": "accepted",
+      "exit": 0,
+      "codes": [],
+      "retrieval_evaluated": true,
+      "retrieved_ids": [
+        "doc-plan"
+      ],
+      "semantic_support": "not_evaluated",
+      "reference_integrity_passed": true,
+      "retrieval_expectation_passed": true,
+      "fixture_sha256": {
+        "corpus": "e163788e8cb60bf6d93876e353e2e9d7330f1245726974a382fc6487b4c15a8c",
+        "request": "fefd5b4e2f6eb88b6a1e2b699715e14b13b2d90b9451034576854c65a27abacb"
+      }
+    },
+    {
+      "name": "invented_source",
+      "status": "rejected",
+      "exit": 1,
+      "codes": [
+        "unknown_source"
+      ],
+      "retrieval_evaluated": true,
+      "retrieved_ids": [
+        "doc-plan"
+      ],
+      "semantic_support": "not_evaluated",
+      "reference_integrity_passed": false,
+      "retrieval_expectation_passed": true,
+      "fixture_sha256": {
+        "corpus": "e163788e8cb60bf6d93876e353e2e9d7330f1245726974a382fc6487b4c15a8c",
+        "request": "949d10dd983497815be565d3dd8ace9f978440421c8d7158ca021e430cecb50d"
+      }
+    },
+    {
+      "name": "known_unretrieved_source",
+      "status": "rejected",
+      "exit": 1,
+      "codes": [
+        "source_not_retrieved"
+      ],
+      "retrieval_evaluated": true,
+      "retrieved_ids": [
+        "doc-plan"
+      ],
+      "semantic_support": "not_evaluated",
+      "reference_integrity_passed": false,
+      "retrieval_expectation_passed": true,
+      "fixture_sha256": {
+        "corpus": "e163788e8cb60bf6d93876e353e2e9d7330f1245726974a382fc6487b4c15a8c",
+        "request": "ec6da25bcb35046281958325dd65ed30d15bba5eea7d6a76687825240396e441"
+      }
+    },
+    {
+      "name": "stale_version",
+      "status": "rejected",
+      "exit": 1,
+      "codes": [
+        "source_version_mismatch"
+      ],
+      "retrieval_evaluated": true,
+      "retrieved_ids": [
+        "doc-plan"
+      ],
+      "semantic_support": "not_evaluated",
+      "reference_integrity_passed": false,
+      "retrieval_expectation_passed": true,
+      "fixture_sha256": {
+        "corpus": "e163788e8cb60bf6d93876e353e2e9d7330f1245726974a382fc6487b4c15a8c",
+        "request": "1d57b8bcc7e9138ccea40584879d148165e423c9d18f67be206a1711102376a2"
+      }
+    },
+    {
+      "name": "digest_mismatch",
+      "status": "rejected",
+      "exit": 1,
+      "codes": [
+        "source_digest_mismatch"
+      ],
+      "retrieval_evaluated": true,
+      "retrieved_ids": [
+        "doc-plan"
+      ],
+      "semantic_support": "not_evaluated",
+      "reference_integrity_passed": false,
+      "retrieval_expectation_passed": true,
+      "fixture_sha256": {
+        "corpus": "e163788e8cb60bf6d93876e353e2e9d7330f1245726974a382fc6487b4c15a8c",
+        "request": "bd2b6dd444871515e0f35b3237995308ae21e724e48df0690d0bb59d1b6ac7ea"
+      }
+    },
+    {
+      "name": "source_changed_and_stale_snapshot",
+      "status": "rejected",
+      "exit": 1,
+      "codes": [
+        "corpus_snapshot_mismatch",
+        "source_digest_mismatch"
+      ],
+      "retrieval_evaluated": true,
+      "retrieved_ids": [
+        "doc-plan"
+      ],
+      "semantic_support": "not_evaluated",
+      "reference_integrity_passed": false,
+      "retrieval_expectation_passed": true,
+      "fixture_sha256": {
+        "corpus": "d1359c5edc673553a14763f640aa321c74202cb8b6bf7dfb6914844320145bce",
+        "request": "6c024360beedf59094c12a620d89dfdce4d61c2d0e72019e4711e180bc1747f1"
+      }
+    },
+    {
+      "name": "changed_quote",
+      "status": "rejected",
+      "exit": 1,
+      "codes": [
+        "quote_mismatch"
+      ],
+      "retrieval_evaluated": true,
+      "retrieved_ids": [
+        "doc-plan"
+      ],
+      "semantic_support": "not_evaluated",
+      "reference_integrity_passed": false,
+      "retrieval_expectation_passed": true,
+      "fixture_sha256": {
+        "corpus": "e163788e8cb60bf6d93876e353e2e9d7330f1245726974a382fc6487b4c15a8c",
+        "request": "5261baf6ee86e8fa7c3e4b826c5656d9a9747e22a78f38ad0761a142d0226f77"
+      }
+    },
+    {
+      "name": "reversed_span",
+      "status": "rejected",
+      "exit": 1,
+      "codes": [
+        "invalid_span_bounds"
+      ],
+      "retrieval_evaluated": true,
+      "retrieved_ids": [
+        "doc-plan"
+      ],
+      "semantic_support": "not_evaluated",
+      "reference_integrity_passed": false,
+      "retrieval_expectation_passed": true,
+      "fixture_sha256": {
+        "corpus": "e163788e8cb60bf6d93876e353e2e9d7330f1245726974a382fc6487b4c15a8c",
+        "request": "12fb422b58205b3153b87aa00fd1e581b6fa734cd8df4c79448b193004866906"
+      }
+    },
+    {
+      "name": "out_of_range_span",
+      "status": "rejected",
+      "exit": 1,
+      "codes": [
+        "invalid_span_bounds"
+      ],
+      "retrieval_evaluated": true,
+      "retrieved_ids": [
+        "doc-plan"
+      ],
+      "semantic_support": "not_evaluated",
+      "reference_integrity_passed": false,
+      "retrieval_expectation_passed": true,
+      "fixture_sha256": {
+        "corpus": "e163788e8cb60bf6d93876e353e2e9d7330f1245726974a382fc6487b4c15a8c",
+        "request": "c7e22835cfad205b0cf1b9eb79b8ef3973ce5770e1b9753dff4f9c5732cd042c"
+      }
+    },
+    {
+      "name": "utf8_interior_boundary",
+      "status": "rejected",
+      "exit": 1,
+      "codes": [
+        "invalid_utf8_boundary"
+      ],
+      "retrieval_evaluated": true,
+      "retrieved_ids": [
+        "doc-unicode"
+      ],
+      "semantic_support": "not_evaluated",
+      "reference_integrity_passed": false,
+      "retrieval_expectation_passed": true,
+      "fixture_sha256": {
+        "corpus": "e163788e8cb60bf6d93876e353e2e9d7330f1245726974a382fc6487b4c15a8c",
+        "request": "749b7e05a76a610fee8ede3e4798f4e5b78233088faab18362798417a8238662"
+      }
+    },
+    {
+      "name": "absent_required_citations",
+      "status": "invalid_fixture",
+      "exit": 2,
+      "codes": [
+        "citations_required"
+      ],
+      "retrieval_evaluated": false,
+      "retrieved_ids": [],
+      "semantic_support": "not_evaluated",
+      "reference_integrity_passed": null,
+      "retrieval_expectation_passed": null,
+      "fixture_sha256": {
+        "corpus": "e163788e8cb60bf6d93876e353e2e9d7330f1245726974a382fc6487b4c15a8c",
+        "request": "c403ab27ac75fca869f02d793a5d6440e962ea015d7af20089200770c7ff40d8"
+      }
+    },
+    {
+      "name": "duplicate_source_id",
+      "status": "invalid_fixture",
+      "exit": 2,
+      "codes": [
+        "duplicate_source_id"
+      ],
+      "retrieval_evaluated": false,
+      "retrieved_ids": [],
+      "semantic_support": "not_evaluated",
+      "reference_integrity_passed": null,
+      "retrieval_expectation_passed": null,
+      "fixture_sha256": {
+        "corpus": "0fa0d3cab65fc1990c0e9d581a2ea06cdde8ebd465ab708b4711f0f2cb5dfe18",
+        "request": "6c024360beedf59094c12a620d89dfdce4d61c2d0e72019e4711e180bc1747f1"
+      }
+    },
+    {
+      "name": "missing_expected_retrieval_source",
+      "status": "rejected",
+      "exit": 1,
+      "codes": [
+        "missing_expected_retrieval_source"
+      ],
+      "retrieval_evaluated": true,
+      "retrieved_ids": [
+        "doc-plan"
+      ],
+      "semantic_support": "not_evaluated",
+      "reference_integrity_passed": true,
+      "retrieval_expectation_passed": false,
+      "fixture_sha256": {
+        "corpus": "e163788e8cb60bf6d93876e353e2e9d7330f1245726974a382fc6487b4c15a8c",
+        "request": "46ec1a655b9bfb36e3a68d7fcdd055589c8eb15978ffa101e932fc88b864462a"
+      }
+    },
+    {
+      "name": "empty_corpus",
+      "status": "invalid_fixture",
+      "exit": 2,
+      "codes": [
+        "empty_corpus"
+      ],
+      "retrieval_evaluated": false,
+      "retrieved_ids": [],
+      "semantic_support": "not_evaluated",
+      "reference_integrity_passed": null,
+      "retrieval_expectation_passed": null,
+      "fixture_sha256": {
+        "corpus": "6c3b9f0390341dfd18635526c002291b374ba88078d4f87034c71c820e21474e",
+        "request": "6c024360beedf59094c12a620d89dfdce4d61c2d0e72019e4711e180bc1747f1"
+      }
+    },
+    {
+      "name": "empty_source_text",
+      "status": "invalid_fixture",
+      "exit": 2,
+      "codes": [
+        "empty_source_field"
+      ],
+      "retrieval_evaluated": false,
+      "retrieved_ids": [],
+      "semantic_support": "not_evaluated",
+      "reference_integrity_passed": null,
+      "retrieval_expectation_passed": null,
+      "fixture_sha256": {
+        "corpus": "230e700fe722e4b7a35d5df565f222f919fa7b297a57120783df3917e929547a",
+        "request": "6c024360beedf59094c12a620d89dfdce4d61c2d0e72019e4711e180bc1747f1"
+      }
+    },
+    {
+      "name": "malformed_request_missing_query",
+      "status": "invalid_fixture",
+      "exit": 2,
+      "codes": [
+        "invalid_request_json"
+      ],
+      "retrieval_evaluated": false,
+      "retrieved_ids": [],
+      "semantic_support": "not_evaluated",
+      "reference_integrity_passed": null,
+      "retrieval_expectation_passed": null,
+      "fixture_sha256": {
+        "corpus": "e163788e8cb60bf6d93876e353e2e9d7330f1245726974a382fc6487b4c15a8c",
+        "request": "6b9bb7d6174cc25816ce81d593efba84cbc0042fcc5c9b6e1df245ee28a1205b"
+      }
+    },
+    {
+      "name": "empty_quote",
+      "status": "rejected",
+      "exit": 1,
+      "codes": [
+        "empty_quote",
+        "quote_mismatch"
+      ],
+      "retrieval_evaluated": true,
+      "retrieved_ids": [
+        "doc-plan"
+      ],
+      "semantic_support": "not_evaluated",
+      "reference_integrity_passed": false,
+      "retrieval_expectation_passed": true,
+      "fixture_sha256": {
+        "corpus": "e163788e8cb60bf6d93876e353e2e9d7330f1245726974a382fc6487b4c15a8c",
+        "request": "1a0841fbcf4f221d89f7908dacfc62bc1d460cb7cde23c70ee0243537a348c8b"
+      }
+    },
+    {
+      "name": "invalid_top_k",
+      "status": "invalid_fixture",
+      "exit": 2,
+      "codes": [
+        "invalid_request_fields"
+      ],
+      "retrieval_evaluated": false,
+      "retrieved_ids": [],
+      "semantic_support": "not_evaluated",
+      "reference_integrity_passed": null,
+      "retrieval_expectation_passed": null,
+      "fixture_sha256": {
+        "corpus": "e163788e8cb60bf6d93876e353e2e9d7330f1245726974a382fc6487b4c15a8c",
+        "request": "644c227329511cd7d88a4db962b4f1385eac2d0737ecfd3189703eddaffe01d3"
+      }
+    },
+    {
+      "name": "malformed_corpus_json",
+      "status": "invalid_fixture",
+      "exit": 2,
+      "codes": [
+        "invalid_corpus_json"
+      ],
+      "retrieval_evaluated": false,
+      "retrieved_ids": [],
+      "semantic_support": "not_evaluated",
+      "reference_integrity_passed": null,
+      "retrieval_expectation_passed": null,
+      "fixture_sha256": {
+        "corpus": "8f9302f65614f26c0ac129b3a69b2617d858989920ca60be65da649dc4b34118",
+        "request": "6c024360beedf59094c12a620d89dfdce4d61c2d0e72019e4711e180bc1747f1"
+      }
+    },
+    {
+      "name": "snapshot_digest_mismatch",
+      "status": "rejected",
+      "exit": 1,
+      "codes": [
+        "corpus_snapshot_mismatch"
+      ],
+      "retrieval_evaluated": true,
+      "retrieved_ids": [
+        "doc-plan"
+      ],
+      "semantic_support": "not_evaluated",
+      "reference_integrity_passed": false,
+      "retrieval_expectation_passed": true,
+      "fixture_sha256": {
+        "corpus": "e163788e8cb60bf6d93876e353e2e9d7330f1245726974a382fc6487b4c15a8c",
+        "request": "6f3feeb54a536ef96d0b88fb59cf111c7234fe85717ed6b9292007f1934b2d74"
+      }
+    }
+  ]
+}

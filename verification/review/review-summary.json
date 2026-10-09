@@ -1,0 +1,16 @@
+{
+  "verdict": "PASS_WITH_SCOPE_LIMITS",
+  "independent_review_receipt_sha256": "1d171209c79ac4531ecd112bef98941fd5fac01758029abef96a81bd5da60253",
+  "fixture_counts_reviewed": {
+    "accepted": 3,
+    "rejected": 12,
+    "invalid": 7,
+    "actual_retrievals": 15
+  },
+  "correction": {
+    "id": "RAG-DOC-01",
+    "priority": 3,
+    "summary": "Unqualified queries default to source_text; explicit indexed source_id field queries remain allowed."
+  },
+  "independent_review_repeated": false
+}

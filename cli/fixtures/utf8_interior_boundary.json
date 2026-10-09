@@ -1,0 +1,19 @@
+{
+  "query": "records",
+  "top_k": 1,
+  "corpus_sha256": "e163788e8cb60bf6d93876e353e2e9d7330f1245726974a382fc6487b4c15a8c",
+  "expected_source_ids": [
+    "doc-unicode"
+  ],
+  "answer": "The source describes café records.",
+  "citations": [
+    {
+      "source_id": "doc-unicode",
+      "source_version": "v2",
+      "source_sha256": "e93cf50c25eefa67f83a64714294392f6a1dcc26f96a790348d6c981c4826a24",
+      "start": 4,
+      "end": 5,
+      "quote": "é"
+    }
+  ]
+}

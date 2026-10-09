@@ -1,0 +1,388 @@
+[
+  {
+    "name": "valid_retrieved_quote",
+    "corpus": "corpus.json",
+    "request": "valid_retrieved_quote.json",
+    "expected": {
+      "exit": 0,
+      "status": "accepted",
+      "codes": [],
+      "semantic_support": "not_evaluated",
+      "retrieval_evaluated": true,
+      "retrieved_ids": [
+        "doc-plan"
+      ]
+    },
+    "reference_passed": true,
+    "retrieval_passed": true
+  },
+  {
+    "name": "valid_utf8_quote",
+    "corpus": "corpus.json",
+    "request": "valid_utf8_quote.json",
+    "expected": {
+      "exit": 0,
+      "status": "accepted",
+      "codes": [],
+      "semantic_support": "not_evaluated",
+      "retrieval_evaluated": true,
+      "retrieved_ids": [
+        "doc-unicode"
+      ]
+    },
+    "reference_passed": true,
+    "retrieval_passed": true
+  },
+  {
+    "name": "semantic_counterexample",
+    "corpus": "corpus.json",
+    "request": "semantic_counterexample.json",
+    "expected": {
+      "exit": 0,
+      "status": "accepted",
+      "codes": [],
+      "semantic_support": "not_evaluated",
+      "retrieval_evaluated": true,
+      "retrieved_ids": [
+        "doc-plan"
+      ]
+    },
+    "reference_passed": true,
+    "retrieval_passed": true
+  },
+  {
+    "name": "invented_source",
+    "corpus": "corpus.json",
+    "request": "invented_source.json",
+    "expected": {
+      "exit": 1,
+      "status": "rejected",
+      "codes": [
+        "unknown_source"
+      ],
+      "semantic_support": "not_evaluated",
+      "retrieval_evaluated": true,
+      "retrieved_ids": [
+        "doc-plan"
+      ]
+    },
+    "reference_passed": false,
+    "retrieval_passed": true
+  },
+  {
+    "name": "known_unretrieved_source",
+    "corpus": "corpus.json",
+    "request": "known_unretrieved_source.json",
+    "expected": {
+      "exit": 1,
+      "status": "rejected",
+      "codes": [
+        "source_not_retrieved"
+      ],
+      "semantic_support": "not_evaluated",
+      "retrieval_evaluated": true,
+      "retrieved_ids": [
+        "doc-plan"
+      ]
+    },
+    "reference_passed": false,
+    "retrieval_passed": true
+  },
+  {
+    "name": "stale_version",
+    "corpus": "corpus.json",
+    "request": "stale_version.json",
+    "expected": {
+      "exit": 1,
+      "status": "rejected",
+      "codes": [
+        "source_version_mismatch"
+      ],
+      "semantic_support": "not_evaluated",
+      "retrieval_evaluated": true,
+      "retrieved_ids": [
+        "doc-plan"
+      ]
+    },
+    "reference_passed": false,
+    "retrieval_passed": true
+  },
+  {
+    "name": "digest_mismatch",
+    "corpus": "corpus.json",
+    "request": "digest_mismatch.json",
+    "expected": {
+      "exit": 1,
+      "status": "rejected",
+      "codes": [
+        "source_digest_mismatch"
+      ],
+      "semantic_support": "not_evaluated",
+      "retrieval_evaluated": true,
+      "retrieved_ids": [
+        "doc-plan"
+      ]
+    },
+    "reference_passed": false,
+    "retrieval_passed": true
+  },
+  {
+    "name": "source_changed_and_stale_snapshot",
+    "corpus": "changed-corpus.json",
+    "request": "source_changed_and_stale_snapshot.json",
+    "expected": {
+      "exit": 1,
+      "status": "rejected",
+      "codes": [
+        "corpus_snapshot_mismatch",
+        "source_digest_mismatch"
+      ],
+      "semantic_support": "not_evaluated",
+      "retrieval_evaluated": true,
+      "retrieved_ids": [
+        "doc-plan"
+      ]
+    },
+    "reference_passed": false,
+    "retrieval_passed": true
+  },
+  {
+    "name": "changed_quote",
+    "corpus": "corpus.json",
+    "request": "changed_quote.json",
+    "expected": {
+      "exit": 1,
+      "status": "rejected",
+      "codes": [
+        "quote_mismatch"
+      ],
+      "semantic_support": "not_evaluated",
+      "retrieval_evaluated": true,
+      "retrieved_ids": [
+        "doc-plan"
+      ]
+    },
+    "reference_passed": false,
+    "retrieval_passed": true
+  },
+  {
+    "name": "reversed_span",
+    "corpus": "corpus.json",
+    "request": "reversed_span.json",
+    "expected": {
+      "exit": 1,
+      "status": "rejected",
+      "codes": [
+        "invalid_span_bounds"
+      ],
+      "semantic_support": "not_evaluated",
+      "retrieval_evaluated": true,
+      "retrieved_ids": [
+        "doc-plan"
+      ]
+    },
+    "reference_passed": false,
+    "retrieval_passed": true
+  },
+  {
+    "name": "out_of_range_span",
+    "corpus": "corpus.json",
+    "request": "out_of_range_span.json",
+    "expected": {
+      "exit": 1,
+      "status": "rejected",
+      "codes": [
+        "invalid_span_bounds"
+      ],
+      "semantic_support": "not_evaluated",
+      "retrieval_evaluated": true,
+      "retrieved_ids": [
+        "doc-plan"
+      ]
+    },
+    "reference_passed": false,
+    "retrieval_passed": true
+  },
+  {
+    "name": "utf8_interior_boundary",
+    "corpus": "corpus.json",
+    "request": "utf8_interior_boundary.json",
+    "expected": {
+      "exit": 1,
+      "status": "rejected",
+      "codes": [
+        "invalid_utf8_boundary"
+      ],
+      "semantic_support": "not_evaluated",
+      "retrieval_evaluated": true,
+      "retrieved_ids": [
+        "doc-unicode"
+      ]
+    },
+    "reference_passed": false,
+    "retrieval_passed": true
+  },
+  {
+    "name": "absent_required_citations",
+    "corpus": "corpus.json",
+    "request": "absent_required_citations.json",
+    "expected": {
+      "exit": 2,
+      "status": "invalid_fixture",
+      "codes": [
+        "citations_required"
+      ],
+      "semantic_support": "not_evaluated",
+      "retrieval_evaluated": false,
+      "retrieved_ids": []
+    }
+  },
+  {
+    "name": "duplicate_source_id",
+    "corpus": "duplicate-corpus.json",
+    "request": "duplicate_source_id.json",
+    "expected": {
+      "exit": 2,
+      "status": "invalid_fixture",
+      "codes": [
+        "duplicate_source_id"
+      ],
+      "semantic_support": "not_evaluated",
+      "retrieval_evaluated": false,
+      "retrieved_ids": []
+    }
+  },
+  {
+    "name": "missing_expected_retrieval_source",
+    "corpus": "corpus.json",
+    "request": "missing_expected_retrieval_source.json",
+    "expected": {
+      "exit": 1,
+      "status": "rejected",
+      "codes": [
+        "missing_expected_retrieval_source"
+      ],
+      "semantic_support": "not_evaluated",
+      "retrieval_evaluated": true,
+      "retrieved_ids": [
+        "doc-plan"
+      ]
+    },
+    "reference_passed": true,
+    "retrieval_passed": false
+  },
+  {
+    "name": "empty_corpus",
+    "corpus": "empty-corpus.json",
+    "request": "empty_corpus.json",
+    "expected": {
+      "exit": 2,
+      "status": "invalid_fixture",
+      "codes": [
+        "empty_corpus"
+      ],
+      "semantic_support": "not_evaluated",
+      "retrieval_evaluated": false,
+      "retrieved_ids": []
+    }
+  },
+  {
+    "name": "empty_source_text",
+    "corpus": "empty-text-corpus.json",
+    "request": "empty_source_text.json",
+    "expected": {
+      "exit": 2,
+      "status": "invalid_fixture",
+      "codes": [
+        "empty_source_field"
+      ],
+      "semantic_support": "not_evaluated",
+      "retrieval_evaluated": false,
+      "retrieved_ids": []
+    }
+  },
+  {
+    "name": "malformed_request_missing_query",
+    "corpus": "corpus.json",
+    "request": "malformed_request_missing_query.json",
+    "expected": {
+      "exit": 2,
+      "status": "invalid_fixture",
+      "codes": [
+        "invalid_request_json"
+      ],
+      "semantic_support": "not_evaluated",
+      "retrieval_evaluated": false,
+      "retrieved_ids": []
+    }
+  },
+  {
+    "name": "empty_quote",
+    "corpus": "corpus.json",
+    "request": "empty_quote.json",
+    "expected": {
+      "exit": 1,
+      "status": "rejected",
+      "codes": [
+        "empty_quote",
+        "quote_mismatch"
+      ],
+      "semantic_support": "not_evaluated",
+      "retrieval_evaluated": true,
+      "retrieved_ids": [
+        "doc-plan"
+      ]
+    },
+    "reference_passed": false,
+    "retrieval_passed": true
+  },
+  {
+    "name": "invalid_top_k",
+    "corpus": "corpus.json",
+    "request": "invalid_top_k.json",
+    "expected": {
+      "exit": 2,
+      "status": "invalid_fixture",
+      "codes": [
+        "invalid_request_fields"
+      ],
+      "semantic_support": "not_evaluated",
+      "retrieval_evaluated": false,
+      "retrieved_ids": []
+    }
+  },
+  {
+    "name": "malformed_corpus_json",
+    "corpus": "malformed-corpus.json",
+    "request": "malformed_corpus_json.json",
+    "expected": {
+      "exit": 2,
+      "status": "invalid_fixture",
+      "codes": [
+        "invalid_corpus_json"
+      ],
+      "semantic_support": "not_evaluated",
+      "retrieval_evaluated": false,
+      "retrieved_ids": []
+    }
+  },
+  {
+    "name": "snapshot_digest_mismatch",
+    "corpus": "corpus.json",
+    "request": "snapshot_digest_mismatch.json",
+    "expected": {
+      "exit": 1,
+      "status": "rejected",
+      "codes": [
+        "corpus_snapshot_mismatch"
+      ],
+      "semantic_support": "not_evaluated",
+      "retrieval_evaluated": true,
+      "retrieved_ids": [
+        "doc-plan"
+      ]
+    },
+    "reference_passed": false,
+    "retrieval_passed": true
+  }
+]

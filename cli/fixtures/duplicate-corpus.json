@@ -1,0 +1,24 @@
+{
+  "sources": [
+    {
+      "id": "doc-plan",
+      "version": "v1",
+      "text": "The orchard grows red apples. Harvest begins in October."
+    },
+    {
+      "id": "doc-water",
+      "version": "v3",
+      "text": "Water tests measure river depth."
+    },
+    {
+      "id": "doc-unicode",
+      "version": "v2",
+      "text": "Café records describe quiet streets."
+    },
+    {
+      "id": "doc-plan",
+      "version": "v1",
+      "text": "The orchard grows red apples. Harvest begins in October."
+    }
+  ]
+}

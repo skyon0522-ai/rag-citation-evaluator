@@ -1,0 +1,128 @@
+{
+  "source_pin": "72d1ef9a6468aa68bbc69dcc80cdf60aaf64364d",
+  "reference": "components/tantivy/examples/basic_search.rs",
+  "reference_sha256": "ba09bab151cbc125d23ad777fd5b5418e3efd9f3b087fc042f859bebef240f2b",
+  "reference_mit_license": "LICENSE",
+  "reference_authors": "AUTHORS",
+  "implementation": "cli/src/main.rs",
+  "implementation_sha256": "f0f8a0fd063c1728e54484428dc7b94f87f0cd1c67e798c9f6111400d4282af5",
+  "diff": "derivation.diff",
+  "diff_sha256": "e68557a0864e3c18019b92221bdc7c9cfcd81c2fef2b8a4dc2905378697cc7ef",
+  "adapted_sections": [
+    {
+      "upstream_lines": [
+        34,
+        60
+      ],
+      "behavior": "Schema builder: title/body become stored source_id and indexed/stored source_text."
+    },
+    {
+      "upstream_lines": [
+        68,
+        78
+      ],
+      "behavior": "Index and 50MB writer: in-memory index replaces temporary on-disk example for this single request."
+    },
+    {
+      "upstream_lines": [
+        82,
+        129
+      ],
+      "behavior": "Document insertion: synthetic JSON source loop uses the same doc!/add_document APIs."
+    },
+    {
+      "upstream_lines": [
+        142,
+        182
+      ],
+      "behavior": "Commit, reader policy and actual searcher use follow the inspected example."
+    },
+    {
+      "upstream_lines": [
+        190,
+        211
+      ],
+      "behavior": "QueryParser defaults unqualified queries to source_text; native field-qualified grammar also supports indexed source_id. TopDocs uses bounded top_k 1..5."
+    },
+    {
+      "upstream_lines": [
+        213,
+        222
+      ],
+      "behavior": "Stored-document retrieval returns selected source IDs and verifies exact stored UTF-8 text."
+    }
+  ],
+  "task_specific_additions": [
+    "strict JSON fixture validation before indexing",
+    "raw corpus snapshot SHA-256",
+    "source existence/selected retrieval membership/version/text SHA-256",
+    "valid exclusive UTF-8 byte span and exact nonempty quotation",
+    "separate expected retrieval-ID and reference-integrity results",
+    "semantic_support explicitly not_evaluated with executable false-answer counterexample"
+  ],
+  "copied_engine": {
+    "manifest_path": "components/tantivy/Cargo.toml",
+    "source": null,
+    "version": "0.26.2",
+    "actual_build_log": "Not distributed; see verification/portable-run.json.",
+    "local_workspace_packages": [
+      {
+        "name": "ownedbytes",
+        "version": "0.9.0"
+      },
+      {
+        "name": "tantivy",
+        "version": "0.26.2"
+      },
+      {
+        "name": "tantivy-bitpacker",
+        "version": "0.10.0"
+      },
+      {
+        "name": "tantivy-columnar",
+        "version": "0.7.0"
+      },
+      {
+        "name": "tantivy-common",
+        "version": "0.11.0"
+      },
+      {
+        "name": "tantivy-query-grammar",
+        "version": "0.26.0"
+      },
+      {
+        "name": "tantivy-sstable",
+        "version": "0.7.0"
+      },
+      {
+        "name": "tantivy-stacker",
+        "version": "0.7.0"
+      },
+      {
+        "name": "tantivy-tokenizer-api",
+        "version": "0.7.0"
+      }
+    ]
+  },
+  "license_hashes": {
+    "LICENSE": "acacd14bebbffdb30d62443c282fb4da3e81915a9f69c63d5d745a029f44de8a",
+    "AUTHORS": "141e25490cf9e0d3a05374171cb0a42c91a0cf0fb2041ba4c010f466e89b596d"
+  },
+  "research_scope": {
+    "source": "https://aclanthology.org/2023.emnlp-main.398/",
+    "inspected_by": "root before this bounded brief",
+    "used_distinction": "sections3.2-3.3 separate answer correctness from NLI citation support; section4.1 uses existing retrievers",
+    "not_imported_or_executed": [
+      "ALCE models/datasets/metrics",
+      "Ragas screened db8eb679f0933f7211e170d1508afebe39a3a49a"
+    ]
+  },
+  "public_curation_correction": {
+    "id": "RAG-DOC-01",
+    "priority": 3,
+    "accepted_private_derivation_unchanged": true,
+    "previous_behavior": "QueryParser and TopDocs use only source text and bounded top_k 1..5.",
+    "corrected_behavior": "QueryParser defaults unqualified queries to source_text; native field-qualified grammar also supports indexed source_id. TopDocs uses bounded top_k 1..5.",
+    "basis": "Copied parser documentation at253 and explicit field resolution at725-740; static review only, no new field-query fixture execution."
+  }
+}

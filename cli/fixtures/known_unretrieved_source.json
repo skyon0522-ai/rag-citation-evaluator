@@ -1,0 +1,19 @@
+{
+  "query": "orchard",
+  "top_k": 1,
+  "corpus_sha256": "e163788e8cb60bf6d93876e353e2e9d7330f1245726974a382fc6487b4c15a8c",
+  "expected_source_ids": [
+    "doc-plan"
+  ],
+  "answer": "The orchard grows red apples.",
+  "citations": [
+    {
+      "source_id": "doc-water",
+      "source_version": "v3",
+      "source_sha256": "981ac91919ae9ec887c66eaa7343de9cde9390967f641ee727c42ae14e0c46d2",
+      "start": 0,
+      "end": 11,
+      "quote": "Water tests"
+    }
+  ]
+}

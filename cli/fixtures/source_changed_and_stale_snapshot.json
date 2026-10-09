@@ -1,0 +1,19 @@
+{
+  "query": "orchard",
+  "top_k": 1,
+  "corpus_sha256": "e163788e8cb60bf6d93876e353e2e9d7330f1245726974a382fc6487b4c15a8c",
+  "expected_source_ids": [
+    "doc-plan"
+  ],
+  "answer": "The orchard grows red apples.",
+  "citations": [
+    {
+      "source_id": "doc-plan",
+      "source_version": "v1",
+      "source_sha256": "bea09cede6c496da0cc2311783715b9977553cce022c94c9601059d401f70266",
+      "start": 0,
+      "end": 29,
+      "quote": "The orchard grows red apples."
+    }
+  ]
+}

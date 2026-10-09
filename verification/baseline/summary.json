@@ -1,0 +1,13 @@
+{
+  "status": "original_and_unchanged_copy_example_passed",
+  "commit": "72d1ef9a6468aa68bbc69dcc80cdf60aaf64364d",
+  "git_tree": "0fedd3b9abba2dbf13e9e9094c66e3e62ef6e107",
+  "upstream_blobs": 518,
+  "archive_sha256": "0eded6a7b742426369c22c25463d9470c66c2d83a68890a7ffa15a652d6adebd",
+  "generated_lock_sha256": "3d7fa0ba7ee9f77cd6b6a2a0c69334e4c70e8ad0334cc1800a80caf4ca63c576",
+  "generated_lock_is_not_an_upstream_blob": true,
+  "accepted_baseline_receipt_sha256": "d41a5ef75a03d7fa3ff7227db166ae9c2d10da5ff56a16ed52fdf9dec502d75d",
+  "source_copy_manifest_sha256": "d517dea4abd9aba5808bfda0e59e306791bdcab12dc778cb686952549ac78c06",
+  "baseline_rerun_for_this_curation": false,
+  "registry_cache_policy": "Previously populated Tantivy baseline cache reused; no fresh acquisition."
+}
