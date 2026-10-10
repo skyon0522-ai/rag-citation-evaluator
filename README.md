@@ -4,6 +4,15 @@ This Rust CLI checks a narrow source-and-retrieval contract for citations in a f
 
 This package does not decide whether an answer is true or whether a quotation supports its claim. A deliberately false answer with an intact retrieved quotation is accepted structurally and reports `semantic_support: not_evaluated`.
 
+## Where to look
+
+| Question | File |
+| --- | --- |
+| What does the evaluator actually check? | [CLI source](cli/src/main.rs) |
+| Which cases are run? | [Fixture manifest](cli/fixtures/cases.json) and [portable runner](verify-portable.sh) |
+| Which code is copied or adapted? | [Provenance](PROVENANCE.md), [copied Tantivy](components/tantivy/) and [derivation diff](derivation.diff) |
+| What passed, and what remains outside the claim? | [Verification](VERIFICATION.md), [fixture results](verification/fixture-results.json) and [research limits](RESEARCH.md) |
+
 ## Run the fixed checks
 
 Requirements are Rust and Cargo compatible with Tantivy's declared Rust 1.86 minimum, plus Python 3. The task run used Rust/Cargo 1.99.0 and Python 3.12.3 on Ubuntu 24.04 x86_64.
