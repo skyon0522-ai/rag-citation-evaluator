@@ -30,7 +30,7 @@ The entrypoint builds the CLI with the checked-in lockfile and runs the 22 fixed
 
 The recorded task run passed all 22 fixtures: 3 accepted, 12 rejected, and 7 invalid. Fifteen cases performed real Tantivy retrieval. See [the fixture receipt](verification/fixture-results.json) and [the run record](verification/portable-run.json) for the case outcomes and environment summary.
 
-CI uses the same portable entrypoint, the locked CLI dependencies, Rust 1.99.0 and Python 3.12.3 on Ubuntu 24.04. Its artifact contains only the checked-in synthetic fixture receipt. The workflow is prepared; a remote CI result has not yet been observed for this change. See [CI scope](VERIFICATION.md#continuous-integration) and [security limits](SECURITY.md).
+CI uses the same portable entrypoint, the locked CLI dependencies, Rust 1.99.0 and Python 3.12.3 on Ubuntu 24.04. Its artifact contains only the checked-in synthetic fixture receipt. Observed on **2026-10-11 (JST)**: [GitHub Actions run 38074903217](https://github.com/skyon0522-ai/rag-citation-evaluator/actions/runs/38074903217) succeeded for commit `0885fb561277affbdc89986d77dc585b6f115961`. This remote result is separate from the local fixture run above. See [CI scope](VERIFICATION.md#continuous-integration) and [security limits](SECURITY.md).
 
 The CLI uses the complete local Tantivy copy at [`components/tantivy`](components/tantivy/Cargo.toml), pinned to commit `72d1ef9a6468aa68bbc69dcc80cdf60aaf64364d`. Unqualified queries default to `source_text`; Tantivy's native field-qualified grammar also permits explicitly indexed fields such as `source_id`. The documented `top_k` range is 1–5. No explicit `source_id` field-query fixture was executed.
 
