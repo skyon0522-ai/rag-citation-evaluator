@@ -1,0 +1,19 @@
+{
+  "answer": "Manager approval is required before placing a purchase order.",
+  "citations": [
+    {
+      "end": 93,
+      "quote": "A purchase requires manager approval before an order is placed.",
+      "source_id": "purchase-policy",
+      "source_sha256": "73d3b77a09dbb5cc3514a39e58718f4cc7d23df19ae66bbb1d983bc54d32b9ff",
+      "source_version": "demo-v1",
+      "start": 30
+    }
+  ],
+  "corpus_sha256": "dec3298a4f85ce81c7b1aa3a6bd26279c328206f3fa590323eada9f7198e6bc7",
+  "expected_source_ids": [
+    "purchase-policy"
+  ],
+  "query": "purchase",
+  "top_k": 1
+}

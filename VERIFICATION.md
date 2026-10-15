@@ -2,7 +2,12 @@
 
 ## Recorded run
 
-Run `./verify-portable.sh` to build the CLI with `--locked` and execute the unchanged standard-library fixture verifier against the compiled program. The recorded run used Ubuntu 24.04 x86_64, Rust/Cargo 1.99.0 and Python 3.12.3. It reused previously populated local registry caches and ran Cargo offline. No baseline example was repeated.
+The original recorded run built the CLI with `--locked` and executed the
+unchanged standard-library fixture verifier against the compiled program. It
+used Ubuntu 24.04 x86_64, Rust/Cargo 1.99.0 and Python 3.12.3, reused populated
+local registry caches and ran Cargo offline. No upstream baseline example was
+repeated during that curation. The current portable entrypoint also checks the
+new presentation wrapper as described below.
 
 All 22 fixtures passed their expected outcomes:
 
@@ -20,11 +25,69 @@ The corrected query description is precise: unqualified queries default to `sour
 
 ## Continuous integration
 
-The [portable workflow](.github/workflows/portable.yml) reuses `verify-portable.sh`: `cargo build --locked` builds the actual local-path CLI, then the existing verifier executes the 22 synthetic fixtures against that binary. The workflow follows the checkout, toolchain, build and test sequence inspected in the copied [Tantivy test workflow](components/tantivy/.github/workflows/test.yml) and the direct rustup installation in its [coverage workflow](components/tantivy/.github/workflows/coverage.yml).
+The [portable workflow](.github/workflows/portable.yml) reuses `verify-portable.sh`:
+it builds both actual local-path binaries with the lockfile, runs the wrapper's
+boundary tests, then checks the 22 fixtures directly and through the wrapper.
+An unsafe-text control checks escaped answer display; three recorded examples
+must reproduce all six bundle files byte for byte. The same checker verifies
+33 protected engine/fixture files and all 518 copied component files. The original
+checkout, toolchain and build/test sequence follows the inspected copied
+[Tantivy test workflow](components/tantivy/.github/workflows/test.yml) and the
+rustup installation in its [coverage workflow](components/tantivy/.github/workflows/coverage.yml).
 
 CI selects Ubuntu 24.04, Rust/Cargo 1.99.0 and Python 3.12.3. Third-party Actions are pinned by commit, the repository token has only `contents: read`, and checkout does not retain its credentials. CI starts without a project dependency cache and may acquire locked registry dependencies; it is not an offline or bit-for-bit reproducible build. The hosted runner image can change within its Ubuntu label.
 
-The seven-day `rag-fixture-results` artifact uploads only `fixture-results.json` from the checked-in synthetic suite, including case outcomes, fixture hashes and the compiled binary hash. It does not upload the repository, build directory or arbitrary input files. Keep private corpora and credentials out of fixtures; reports echo query and answer text. Observed on **2026-10-11 (JST)**: [GitHub Actions run 38074903217](https://github.com/skyon0522-ai/rag-citation-evaluator/actions/runs/38074903217) succeeded for commit `0885fb561277affbdc89986d77dc585b6f115961`. This remote result is separate from the local recorded fixture run above. It is evidence for that run's fixed fixture contract, not for answer correctness, privacy or production use. See [security limits and reporting](SECURITY.md).
+The configured seven-day `rag-fixture-results` artifact uploads
+`fixture-results.json` and `report-results.json` from the checked-in synthetic
+checks, not input bundles, the repository or build directory. Keep private
+corpora and credentials out of fixtures: offline report bundles contain the
+full corpus and request bytes as well as query and answer text.
+
+Observed on **2026-10-11 (JST)**:
+[GitHub Actions run 38074903217](https://github.com/skyon0522-ai/rag-citation-evaluator/actions/runs/38074903217)
+succeeded for commit `0885fb561277affbdc89986d77dc585b6f115961` on the earlier
+fixture-only workflow. The new wrapper/workflow steps have not run on GitHub.
+The historical remote result is not evidence for answer correctness, privacy
+or production use. See [security limits and reporting](SECURITY.md).
+
+## Linux report verification: 2026-10-15
+
+The local `verify-portable.sh` run used Ubuntu 24.04 x86_64, Rust/Cargo 1.99.0
+and Python 3.12.3. It built the locked binaries in a new target directory,
+reusing a populated registry cache with Cargo offline. Later checks reused that
+target directory. Dependency acquisition on a new machine was not exercised.
+The [local receipt](verification/report-review-20261015.json) separates these
+results from the unrun new GitHub workflow.
+
+- 10 Unix boundary tests passed, including malformed or signaled engine output,
+  existing paths, dangling symlinks, output collision, escaping and private modes.
+- The original 22 direct fixtures and their 22 review bundles passed. All 22
+  raw engine JSON outputs match the retained earlier results byte for byte.
+- Unsafe answer text and three recorded examples passed: 26 report executions
+  over 25 distinct inputs, including the rejected-quote fixture repeated as a
+  recorded example. Every recorded bundle reproduced all six files exactly.
+- The original engine, lockfile, fixtures and verifier match their 33 recorded
+  hashes. The 518 copied Tantivy files match their existing source manifest.
+  Appending one byte to the engine or copied license was rejected before output
+  creation; both temporary changes were restored.
+- A stale checksum entry for the protected manifest itself was removed. The 33
+  actual file entries are unchanged; the manifest now states its scope and base
+  commit instead of claiming equality to an unavailable private acceptance file.
+- Both executables copied together ran outside the checkout, including paths
+  with spaces and Japanese text. A missing sibling produced a contextual error
+  and no bundle. Existing output was rejected without replacing its contents.
+- Nine actual report variants passed isolated browser checks at widths 1440
+  and 390, including quotation errors, invalid input, UTF-8 and unsafe text.
+  Displayed answers, quotes, sources and decisions agreed with the JSON. Keyboard
+  disclosure, horizontal table scrolling and local evidence links worked;
+  no external requests or active injected elements were observed. Print and
+  reduced-motion media checks passed. Desktop and mobile images were inspected.
+
+The new layer presents the unchanged evaluator output; it does not change
+retrieval, score semantic support or call a provider. The fictional purchase
+policy and deliberately false answer are demonstrations, not customer evidence.
+The report and input snapshots are ordinary editable files, not a signed audit
+trail. Browser checks do not establish comprehensive accessibility or security.
 
 ## What this does not verify
 

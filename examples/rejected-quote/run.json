@@ -1,0 +1,13 @@
+{
+  "engine_binary": "rag-reference-contract",
+  "engine_exit": 1,
+  "error": null,
+  "input_sha256": {
+    "corpus.json": "e163788e8cb60bf6d93876e353e2e9d7330f1245726974a382fc6487b4c15a8c",
+    "request.json": "5261baf6ee86e8fa7c3e4b826c5656d9a9747e22a78f38ad0761a142d0226f77"
+  },
+  "protocol_verified": true,
+  "schema_version": 1,
+  "semantic_support": "not_evaluated",
+  "wrapper_exit": 1
+}

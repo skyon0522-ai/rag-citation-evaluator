@@ -1,0 +1,34 @@
+{
+  "answer": "Manager approval is required before placing a purchase order.",
+  "corpus_sha256": "dec3298a4f85ce81c7b1aa3a6bd26279c328206f3fa590323eada9f7198e6bc7",
+  "engine": {
+    "dependency": "../components/tantivy",
+    "package": "tantivy",
+    "source_pin": "72d1ef9a6468aa68bbc69dcc80cdf60aaf64364d"
+  },
+  "query": "purchase",
+  "reference_integrity": {
+    "errors": [],
+    "passed": true
+  },
+  "retrieval_evaluated": true,
+  "retrieval_expectation": {
+    "expected_source_ids": [
+      "purchase-policy"
+    ],
+    "missing_source_ids": [],
+    "passed": true
+  },
+  "retrieved": [
+    {
+      "score": 0.65803462266922,
+      "source_id": "purchase-policy",
+      "source_sha256": "73d3b77a09dbb5cc3514a39e58718f4cc7d23df19ae66bbb1d983bc54d32b9ff",
+      "source_version": "demo-v1",
+      "stored_text_sha256": "73d3b77a09dbb5cc3514a39e58718f4cc7d23df19ae66bbb1d983bc54d32b9ff"
+    }
+  ],
+  "semantic_support": "not_evaluated",
+  "status": "accepted",
+  "top_k": 1
+}

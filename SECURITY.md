@@ -6,7 +6,13 @@ This is an experimental, fixed-fixture CLI snapshot. It has not received a secur
 
 The CLI reads local corpus and request JSON into memory and builds an in-memory index. It has no authentication, access-control policy, input-size quota or sandbox. Only use data you are authorized to process, and isolate untrusted inputs with operating-system resource limits. Building dependencies may access the registry even though the CLI does not call a provider or start a network service.
 
-Reports include query and answer text, source identifiers and diagnostic details. The fixture verifier also records stdout and stderr. Treat results according to the sensitivity of the input; do not publish private corpora, credentials or customer information in fixtures, CI artifacts, logs or issue reports. CI uploads only the receipt from the checked-in synthetic suite.
+Review bundles include the full corpus and request snapshots as well as query,
+answer, identifiers, diagnostics and engine stdout/stderr. Linux modes 700/600
+limit local access but do not encrypt or authenticate these editable files.
+Treat results according to the sensitivity of the input; do not publish private
+corpora, credentials or customer information in fixtures, CI artifacts, logs or
+issue reports. CI uploads only the two verification receipts from the checked-in
+synthetic suite, not the input bundles.
 
 ## Reporting a vulnerability
 

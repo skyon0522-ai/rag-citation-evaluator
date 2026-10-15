@@ -1,0 +1,40 @@
+{
+  "answer": "The orchard grows red apples.",
+  "corpus_sha256": "e163788e8cb60bf6d93876e353e2e9d7330f1245726974a382fc6487b4c15a8c",
+  "engine": {
+    "dependency": "../components/tantivy",
+    "package": "tantivy",
+    "source_pin": "72d1ef9a6468aa68bbc69dcc80cdf60aaf64364d"
+  },
+  "query": "orchard",
+  "reference_integrity": {
+    "errors": [
+      {
+        "citation_index": 0,
+        "code": "quote_mismatch",
+        "source_id": "doc-plan"
+      }
+    ],
+    "passed": false
+  },
+  "retrieval_evaluated": true,
+  "retrieval_expectation": {
+    "expected_source_ids": [
+      "doc-plan"
+    ],
+    "missing_source_ids": [],
+    "passed": true
+  },
+  "retrieved": [
+    {
+      "score": 0.8367072939872742,
+      "source_id": "doc-plan",
+      "source_sha256": "bea09cede6c496da0cc2311783715b9977553cce022c94c9601059d401f70266",
+      "source_version": "v1",
+      "stored_text_sha256": "bea09cede6c496da0cc2311783715b9977553cce022c94c9601059d401f70266"
+    }
+  ],
+  "semantic_support": "not_evaluated",
+  "status": "rejected",
+  "top_k": 1
+}

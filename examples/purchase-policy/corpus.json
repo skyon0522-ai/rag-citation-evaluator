@@ -1,0 +1,14 @@
+{
+  "sources": [
+    {
+      "id": "purchase-policy",
+      "text": "Fictional demonstration only. A purchase requires manager approval before an order is placed.",
+      "version": "demo-v1"
+    },
+    {
+      "id": "records-policy",
+      "text": "Fictional demonstration only. Records are kept in the internal archive.",
+      "version": "demo-v1"
+    }
+  ]
+}

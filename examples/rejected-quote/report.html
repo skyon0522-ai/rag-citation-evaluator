@@ -1,0 +1,80 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'">
+<title>RAG citation review</title><style>
+body{font:16px/1.55 system-ui,sans-serif;margin:0;background:#f4f7fb;color:#182736}
+main{max-width:70rem;margin:auto;padding:2rem 1rem}h1{line-height:1.2}p{max-width:75ch}
+.panel{background:white;border:1px solid #d1dce8;border-radius:.6rem;padding:1.5rem;margin:1.2rem 0;overflow-wrap:anywhere}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem}
+.grid section{padding:1rem;background:#eaf1f8}.grid h2{font-size:1rem;margin:0 0 .5rem}
+.grid p{font-weight:600;margin:0}.scroll{overflow:auto;max-width:100%}
+.scroll:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid #155b87;outline-offset:2px}
+table{border-collapse:collapse;width:100%;min-width:46rem}th,td{text-align:left;padding:.7rem;border-bottom:1px solid #d1dce8}
+th,td:first-child{white-space:nowrap}
+thead{background:#eaf1f8}code,pre{overflow-wrap:anywhere}pre,blockquote{white-space:pre-wrap}
+pre{padding:1rem;background:#eaf1f8}a{color:#155b87}summary{cursor:pointer;font-weight:600}
+.citation{padding:.5rem 0 1rem;border-bottom:1px solid #d1dce8}blockquote{margin:1rem 0;padding-left:1rem;border-left:3px solid #d1dce8}
+.result{font-weight:600}.answer{white-space:pre-wrap}
+@media(max-width:600px){main{padding:1rem .5rem}.panel{padding:1rem}.grid{grid-template-columns:1fr}}
+@media print{body{background:white}main{max-width:none;padding:0}.panel{border:0;padding:0}}
+</style></head><body><main><h1>RAG citation review</h1>
+<p>This checks retrieval and citation references. It does not evaluate answer truth or whether a quotation supports a claim.</p>
+<section class="panel"><h2>Reference contract rejected</h2><p>Engine exit code: 1</p>
+<div class="grid"><section><h2>Expected retrieval IDs</h2><p>Passed</p></section>
+<section><h2>Reference integrity</h2><p>Failed</p></section>
+<section><h2>Answer support</h2><p>Not evaluated</p></section></div></section>
+<section class="panel"><h2>Query and answer</h2><h3>Query</h3><p>orchard</p>
+<h3>Answer supplied to the check</h3><p class="answer">The orchard grows red apples.</p>
+<p>Structural acceptance can coexist with a false answer. No semantic support score was computed.</p></section>
+<section class="panel"><h2>Retrieved sources</h2><p>Missing expected IDs: []</p>
+<div class="scroll" role="region" aria-label="Retrieved sources" tabindex="0"><table>
+<thead><tr><th scope="col">Source</th><th scope="col">Version</th><th scope="col">Source SHA-256</th><th scope="col">Search score</th></tr></thead>
+<tbody><tr><td>doc-plan</td><td>v1</td><td><code>bea09cede6c496da0cc2311783715b9977553cce022c94c9601059d401f70266</code></td><td>0.8367072939872742</td></tr></tbody></table></div><p>On small screens, swipe the table sideways or focus it and use the arrow keys.</p></section>
+<section class="panel"><h2>Requested citations</h2><article class="citation"><h3>Citation 1</h3>
+            <p><strong>doc-plan</strong> · version v1</p><blockquote>The orchard grows blue apples.</blockquote>
+            <p>UTF-8 byte span: 0–29<br>Expected source SHA-256: <code>bea09cede6c496da0cc2311783715b9977553cce022c94c9601059d401f70266</code></p>
+            <p class="result">quote_mismatch</p></article></section>
+<details class="panel"><summary>Engine result and reproducibility</summary><pre>{
+  &quot;answer&quot;: &quot;The orchard grows red apples.&quot;,
+  &quot;corpus_sha256&quot;: &quot;e163788e8cb60bf6d93876e353e2e9d7330f1245726974a382fc6487b4c15a8c&quot;,
+  &quot;engine&quot;: {
+    &quot;dependency&quot;: &quot;../components/tantivy&quot;,
+    &quot;package&quot;: &quot;tantivy&quot;,
+    &quot;source_pin&quot;: &quot;72d1ef9a6468aa68bbc69dcc80cdf60aaf64364d&quot;
+  },
+  &quot;query&quot;: &quot;orchard&quot;,
+  &quot;reference_integrity&quot;: {
+    &quot;errors&quot;: [
+      {
+        &quot;citation_index&quot;: 0,
+        &quot;code&quot;: &quot;quote_mismatch&quot;,
+        &quot;source_id&quot;: &quot;doc-plan&quot;
+      }
+    ],
+    &quot;passed&quot;: false
+  },
+  &quot;retrieval_evaluated&quot;: true,
+  &quot;retrieval_expectation&quot;: {
+    &quot;expected_source_ids&quot;: [
+      &quot;doc-plan&quot;
+    ],
+    &quot;missing_source_ids&quot;: [],
+    &quot;passed&quot;: true
+  },
+  &quot;retrieved&quot;: [
+    {
+      &quot;score&quot;: 0.8367072939872742,
+      &quot;source_id&quot;: &quot;doc-plan&quot;,
+      &quot;source_sha256&quot;: &quot;bea09cede6c496da0cc2311783715b9977553cce022c94c9601059d401f70266&quot;,
+      &quot;source_version&quot;: &quot;v1&quot;,
+      &quot;stored_text_sha256&quot;: &quot;bea09cede6c496da0cc2311783715b9977553cce022c94c9601059d401f70266&quot;
+    }
+  ],
+  &quot;semantic_support&quot;: &quot;not_evaluated&quot;,
+  &quot;status&quot;: &quot;rejected&quot;,
+  &quot;top_k&quot;: 1
+}</pre>
+<p><a href="engine-result.json">Unmodified engine result</a> · <a href="run.json">Run receipt</a> ·
+<a href="corpus.json">Corpus snapshot</a> · <a href="request.json">Request snapshot</a> · <a href="engine-stderr.log">Engine stderr</a></p>
+<p>This bundle contains the full input corpus, query, answer and quotations. Inspect its contents before sharing.</p></details>
+</main></body></html>

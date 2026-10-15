@@ -28,13 +28,15 @@ jobs:
           rustc --version
           cargo --version
           python3 --version
-      - name: Build locked CLI and check fixed synthetic fixtures
+      - name: Build locked binaries and check fixtures, reports and boundary tests
         run: sh ./verify-portable.sh "$RUNNER_TEMP/rag-fixture-results"
-      - name: Retain synthetic fixture receipt
+      - name: Retain synthetic verification receipts
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           name: rag-fixture-results
-          path: ${{ runner.temp }}/rag-fixture-results/fixture-results.json
+          path: |
+            ${{ runner.temp }}/rag-fixture-results/fixture-results.json
+            ${{ runner.temp }}/rag-fixture-results/report-results.json
           if-no-files-found: warn
           retention-days: 7
